@@ -1,0 +1,59 @@
+{
+  "name": "fue",
+  "description": "fue backend",
+  "version": "0.1.0",
+  "homepage": "",
+  "main": "src",
+  "keywords": [
+    "fue",
+    "feathers"
+  ],
+  "author": {
+    "name": "hjl",
+    "email": "hjiale@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "license": "MIT",
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "engines": {
+    "node": "^9.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "scripts": {
+    "test": "yarn run eslint && yarn run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive --exit"
+  },
+  "dependencies": {
+    "@feathersjs/authentication": "^2.1.2",
+    "@feathersjs/authentication-jwt": "^2.0.0",
+    "@feathersjs/authentication-local": "^1.1.0",
+    "@feathersjs/cli": "^3.4.1",
+    "@feathersjs/configuration": "^1.0.2",
+    "@feathersjs/errors": "^3.2.2",
+    "@feathersjs/express": "^1.2.0",
+    "@feathersjs/feathers": "^3.1.1",
+    "@feathersjs/socketio": "^3.2.0",
+    "await-to-js": "^2.0.1",
+    "casl": "^1.1.0",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "feathers-hooks-common": "^4.7.0",
+    "feathers-mongodb": "^3.0.1",
+    "helmet": "^3.10.0",
+    "mongodb": "^3.0.2",
+    "serve-favicon": "^2.4.5",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "mocha": "^5.0.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}

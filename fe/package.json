@@ -1,0 +1,65 @@
+{
+  "name": "fue",
+  "description": "fue frontend",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "fue",
+    "vuejs",
+    "vuetify"
+  ],
+  "author": {
+    "name": "hjl",
+    "email": "hjiale@gmail.com"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "test": "vue-cli-service test",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@feathersjs/authentication-client": "^1.0.2",
+    "@feathersjs/feathers": "^3.1.1",
+    "@feathersjs/socketio-client": "^1.1.0",
+    "await-to-js": "^2.0.1",
+    "axios": "^0.17.1",
+    "feathers-vuex": "^1.1.4",
+    "socket.io-client": "^2.0.4",
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1",
+    "vuetify": "1.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-alpha.8",
+    "@vue/cli-plugin-eslint": "^3.0.0-alpha.8",
+    "@vue/cli-plugin-unit-mocha": "^3.0.0-alpha.8",
+    "@vue/cli-service": "^3.0.0-alpha.8",
+    "@vue/eslint-config-prettier": "^3.0.0-alpha.8",
+    "@vue/test-utils": "^1.0.0-beta.10",
+    "chai": "^4.1.2",
+    "lint-staged": "^6.0.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-template-compiler": "^2.5.13"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}
