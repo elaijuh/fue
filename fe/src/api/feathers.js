@@ -5,7 +5,7 @@ import Feathers from '@feathersjs/feathers'
 import socketio from '@feathersjs/socketio-client'
 import authentication from '@feathersjs/authentication-client'
 
-const socket = io(process.env.VUE_APP_HOST || 'http://localhost:3030', {
+const socket = io(undefined, {
   transports: ['websocket'],
   forceNew: true,
 })
@@ -16,7 +16,7 @@ const feathers = Feathers()
     authentication({
       storageKey: 'fue-jwt',
       storage: window.localStorage,
-    }),
+    })
   )
 
 // Vue.use(VueFeathers, feathers)

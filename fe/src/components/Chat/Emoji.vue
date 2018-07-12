@@ -3,18 +3,17 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {}
+export default {
+  data() {
+    return {}
+  },
+  props: {
+    emoji: '',
+  },
+  methods: {
+    onEmojiClick() {
+      this.$emit('click', this.emoji)
     },
-    props: {
-      emoji: ''
-    },
-    methods: {
-      onEmojiClick () {
-        this.$emit('click', this.emoji)
-      }
-    }
-  }
+  },
+}
 </script>
-

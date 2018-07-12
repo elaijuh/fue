@@ -17,5 +17,53 @@ module.exports = function(app) {
     service.Model = db.collection('users')
   })
 
+  mongoClient.then(db => {
+    db.createCollection('users', {
+      validator: {
+        $jsonSchema: {
+          bsonType: 'object',
+          required: ['email', 'password'],
+          properties: {
+            email: {
+              bsonType: 'string',
+              description: 'email',
+            },
+            password: {
+              bsonType: 'string',
+              description: 'password',
+            },
+            name: {
+              bsonType: 'string',
+              description: 'password',
+            },
+            roles: {
+              bsonType: 'array',
+              description: 'roles',
+            },
+          },
+        },
+      },
+    })
+      .then(c => {
+        c.createIndex({ email: 1 }, { unique: true })
+        service.Model = c
+      })
+      // create init admin user
+      .then(() => {
+        return service.find({ query: { email: 'admin' } })
+      })
+      .then(data => {
+        if (!data.total) {
+          console.log('Init admin account')
+          service.create({
+            email: 'admin',
+            password: 'wrongpassword',
+            name: '',
+            roles: ['ADMIN'],
+          })
+        }
+      })
+  })
+
   service.hooks(hooks)
 }

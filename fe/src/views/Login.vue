@@ -11,7 +11,16 @@
               <v-card-text>
                 <v-form>
                   <v-text-field prepend-icon="person" name="email" label="Email" type="text" v-model="email" autocomplete="name"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password" v-model="password" autocomplete="current-password"></v-text-field>
+                  <v-text-field
+                    prepend-icon="lock"
+                    name="password"
+                    label="Password"
+                    id="password"
+                    type="password"
+                    v-model="password"
+                    autocomplete="current-password"
+                    @keyup.enter="login(email, password)"
+                  ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -35,7 +44,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import to from 'await-to-js'
 
 export default {
@@ -52,7 +61,7 @@ export default {
     }),
   },
   watch: {
-    uiSnackbar(val) {
+    uiSnackbar() {
       this.snackbar = true
     },
   },
@@ -61,7 +70,7 @@ export default {
     async login(email, password) {
       let res, err
       ;[err, res] = await to(
-        this.authenticate({ strategy: 'local', email, password }),
+        this.authenticate({ strategy: 'local', email, password })
       )
       if (err) {
         this.$store.commit('toggleSnackbar', { message: err.message })

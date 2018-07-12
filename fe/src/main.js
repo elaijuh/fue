@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store/'
+import store from './store'
+
 import '@/plugins/axios'
 import '@/api/feathers'
 
@@ -23,22 +24,9 @@ import VMenu from 'vuetify/es5/components/VMenu'
 import VDataIterator from 'vuetify/es5/components/VDataIterator'
 import VDialog from 'vuetify/es5/components/VDialog'
 import VSelect from 'vuetify/es5/components/VSelect'
+import VAutocomplete from 'vuetify/es5/components/VAutocomplete'
 import VSnackbar from 'vuetify/es5/components/VSnackbar'
 import transitions from 'vuetify/es5/components/transitions'
-// import directives from 'vuetify/es5/directives'
-
-// import {
-//   Vuetify,
-//   VApp,
-//   VNavigationDrawer,
-//   VFooter,
-//   VList,
-//   VBtn,
-//   VIcon,
-//   VGrid,
-//   VToolbar,
-//   transitions,
-// } from 'vuetify'
 
 import style from '@/styles/app.styl'
 
@@ -61,6 +49,7 @@ Vue.use(Vuetify, {
     VDataIterator,
     VDialog,
     VSelect,
+    VAutocomplete,
     VSnackbar,
     // VFooter,
     // VBtn,

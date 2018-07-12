@@ -1,4 +1,4 @@
 {
-  "host": "fue-app.feathersjs.com",
+  "host": "HOST",
   "port": "PORT"
 }

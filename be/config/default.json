@@ -7,6 +7,11 @@
     "max": 50
   },
   "mongodb": "mongodb://localhost:27017/fue",
+  "mongodb": {
+    "connection": "mongodb://localhost:27017/",
+    "db": "fue"
+  },
+
   "authentication": {
     "secret": "fue",
     "strategies": ["jwt", "local"],

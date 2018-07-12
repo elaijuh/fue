@@ -14,53 +14,55 @@
 import Emoji from './Emoji.vue'
 export default {
   data: () => ({
-    emojis: []
+    emojis: [],
   }),
   props: {
-    show: true
+    show: true,
   },
-  async created () {
-    let res = await this.$http.get('https://raw.githubusercontent.com/shanraisshan/EmojiCodeSheet/master/json/string/People.json')
+  async created() {
+    let res = await this.$http.get(
+      'https://raw.githubusercontent.com/shanraisshan/EmojiCodeSheet/master/json/string/People.json'
+    )
     this.emojis = res.data.peoples.people
   },
   methods: {
-    onEmojiClick (emoji) {
+    onEmojiClick(emoji) {
       this.$emit('click', emoji)
     },
-    closePicker () {
+    closePicker() {
       this.$emit('close')
-    }
+    },
   },
   components: {
-    'emoji': Emoji
-  }
+    emoji: Emoji,
+  },
 }
 </script>
 
 <style>
-  .emoji-picker{
-    background: white;
-    position: absolute;
-    bottom: 5rem;
-    left: 0;
-    width: 200px;
-    user-select: none;
-  }
-  .emoji-picker .emoji-header{
-    display: flex;
-    padding: 5px;
-    box-shadow: 0px 5px 9px 0px rgba(0,0,0,0.15);
-  }
-  .emoji-picker .emoji-header .emoji-close{
-    margin-left: auto;
-  }
-  .emoji-picker .emoji-content{
-    margin-top: 10px;
-    overflow-y: auto;
-    height: 200px;
-  }
-  .emoji-picker span{
-    cursor: pointer;
-    font-size: 25px;
-  }
+.emoji-picker {
+  background: white;
+  position: absolute;
+  bottom: 5rem;
+  left: 0;
+  width: 200px;
+  user-select: none;
+}
+.emoji-picker .emoji-header {
+  display: flex;
+  padding: 5px;
+  box-shadow: 0px 5px 9px 0px rgba(0, 0, 0, 0.15);
+}
+.emoji-picker .emoji-header .emoji-close {
+  margin-left: auto;
+}
+.emoji-picker .emoji-content {
+  margin-top: 10px;
+  overflow-y: auto;
+  height: 200px;
+}
+.emoji-picker span {
+  cursor: pointer;
+  font-size: 25px;
+}
 </style>

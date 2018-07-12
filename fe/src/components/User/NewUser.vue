@@ -23,14 +23,13 @@
               required></v-text-field>
             </v-flex>
             <v-flex xs12>
-              <v-select
+              <v-autocomplete
                 label="Role"
-                autocomplete
                 multiple
                 chips
                 v-model="user.roles"
                 :items="roles"
-              ></v-select>
+              ></v-autocomplete>
             </v-flex>
           </v-layout>
         </v-container>
