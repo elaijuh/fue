@@ -3,9 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import '@/plugins/axios'
-import '@/api/feathers'
-
 import Vuetify from 'vuetify/es5/components/Vuetify'
 import VApp from 'vuetify/es5/components/VApp'
 import VGrid from 'vuetify/es5/components/VGrid'
@@ -21,16 +18,29 @@ import VList from 'vuetify/es5/components/VList'
 import VDivider from 'vuetify/es5/components/VDivider'
 import VSubheader from 'vuetify/es5/components/VSubheader'
 import VMenu from 'vuetify/es5/components/VMenu'
+import VDataTable from 'vuetify/es5/components/VDataTable'
 import VDataIterator from 'vuetify/es5/components/VDataIterator'
 import VDialog from 'vuetify/es5/components/VDialog'
 import VSelect from 'vuetify/es5/components/VSelect'
 import VAutocomplete from 'vuetify/es5/components/VAutocomplete'
 import VSnackbar from 'vuetify/es5/components/VSnackbar'
+import VImg from 'vuetify/es5/components/VImg'
 import transitions from 'vuetify/es5/components/transitions'
+import { Ripple } from 'vuetify/es5/directives'
 
-import style from '@/styles/app.styl'
+import '@mdi/font/css/materialdesignicons.css'
+import '@/styles/app.styl'
 
+// plugins
+import Axios from '@/plugins/axios'
+Vue.use(Axios)
+import Feathers from '@/plugins/feathers'
+Vue.use(Feathers)
+
+// vuetify
+import colors from 'vuetify/es5/util/colors'
 Vue.use(Vuetify, {
+  iconfont: 'mdi',
   components: {
     VApp,
     VGrid,
@@ -46,11 +56,13 @@ Vue.use(Vuetify, {
     VList,
     VSubheader,
     VMenu,
+    VDataTable,
     VDataIterator,
     VDialog,
     VSelect,
     VAutocomplete,
     VSnackbar,
+    VImg,
     // VFooter,
     // VBtn,
     // VIcon,
@@ -58,21 +70,19 @@ Vue.use(Vuetify, {
     // VToolbar,
     transitions,
   },
+  directives: { Ripple },
+
   theme: {
-    // primary: '#1976D2',
-    // secondary: '#424242',
-    // accent: '#82B1FF',
-    // error: '#FF5252',
-    // info: '#2196F3',
-    // success: '#4CAF50',
-    // warning: '#FFC107',
-    primary: '#00bfa5',
-    secondary: '#BDBDBD',
-    accent: '#F06292',
-    error: '#E57373',
-    warning: '#FBC02D',
-    info: '#8D6E63',
-    success: '#4CAF50',
+    primary: {
+      base: colors.blue.lighten2,
+      lighten1: colors.grey.base,
+    },
+    secondary: colors.cyan.lighten4,
+    accent: colors.purple.lighten4,
+    error: colors.red.lighten2,
+    warning: colors.amber.lighten2,
+    info: colors.brown.lighten1,
+    success: colors.green.lighten1,
   },
 })
 

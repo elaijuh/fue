@@ -2,7 +2,7 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap mb-3>
       <v-text-field
-        append-icon="search"
+        append-icon="mdi-search-web"
         label="Search"
         single-line
         hide-details
@@ -28,8 +28,8 @@
         lg3
       >
         <v-card>
-          <v-card-media :src="props.item.image" height="400px">
-          </v-card-media>
+          <v-img :src="props.item.image" height="400px">
+          </v-img>
           <v-card-title><h4>{{ props.item.title }}</h4></v-card-title>
           <v-divider></v-divider>
           <v-list dense>
@@ -58,7 +58,7 @@ export default {
   data: () => ({
     rowsPerPageItems: [4, 8, 12],
     pagination: {
-      rowsPerPage: 4
+      rowsPerPage: 4,
     },
     search: '',
     films: [],
@@ -214,6 +214,6 @@ export default {
     this.films.forEach(f => {
       f.image = this.filmImages[f.id].image
     })
-  }
+  },
 }
 </script>

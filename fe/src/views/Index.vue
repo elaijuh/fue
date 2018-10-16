@@ -1,177 +1,119 @@
-<template>
-	<v-app light>
+<template lang="pug">
+v-app
+  v-navigation-drawer(fixed, clipped, dark, app, permanent,
+    :mini-variant.sync="mini",
+    width="200",
+    v-model="drawer",
+  )
+    v-list(dense)
+      template(v-for="(m, i) in menu")
+        v-subheader.mt-3.grey--text(v-if="m.subheader", :key="i")
+          span.i-navigation-subheader {{m.title}}
+        v-divider(v-else-if="m.divider", :key="i")
+        v-list-group(v-else-if="m.children", :key="i", :prepend-icon="m.action", no-action, active-class="primary--text", v-ripple)
+          v-list-tile(slot="activator")
+            v-list-tile-content
+              v-list-tile-title {{m.title}}
+          v-list-tile(v-for="(subm, j) in m.children", :key="j", :to="subm.to", active-class="primary--text")
+            v-list-tile-content
+              v-list-tile-title {{subm.title}}
+        v-list-tile(v-else, :key="i", :to="m.to", exact, active-class="primary--text", v-ripple)
+          v-list-tile-action
+            v-icon {{m.action}}
+          v-list-tile-content
+              v-list-tile-title {{m.title}}
 
-		<v-navigation-drawer
-			fixed
-			app
-      :mini-variant="miniVariant"
-			v-model="drawer"
-		>
-			<v-list>
-        <v-list-tile 
-          router
-          :to="item.to"
-          :key="i"
-          v-for="(item, i) in items"
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-			</v-list>
-    </v-navigation-drawer>
+  v-toolbar(dense, fixed, clipped-left, app, color="primary")
+    v-toolbar-side-icon(@click.stop="mini = !mini")
+    v-toolbar-title Creatix
+    v-spacer
+    span {{me.name || me.email}}
+    v-menu(bottom, left)
+      v-btn(icon, slot="activator")
+        v-icon mdi-account
+      v-list
+        v-list-tile(@click="dialog=!dialog")
+          v-list-tile-title Account
+        v-list-tile(@click="signout")
+          v-list-tile-title Sign out
+    UserEdit(v-if="dialog",
+      :id="me._id",
+      :dialog="dialog",
+      v-on:update:dialog="dialog = false")
 
-    <v-toolbar
-      color="primary"
-      dark
-      fixed
-      app
-    >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn 
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-toolbar-title>Toolbar</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>notifications</v-icon>
-      </v-btn>
-      <v-menu bottom left>
-        <v-btn
-          icon
-          slot="activator"
-        >
-          <v-icon>person</v-icon>
-        </v-btn>
-        <v-list>
-          <v-list-tile  @click="toggleMe = !toggleMe">
-            <v-list-tile-title>My Account</v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile  @click="signout()">
-            <v-list-tile-title>Sign out</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
-    </v-toolbar>
+  v-content
+    router-view
 
-    <v-content>
-      <v-container>
-		    <router-view/>
-      </v-container>
-    </v-content>
+  v-snackbar(:timeout="3000", top, :color="snackbarColor", v-model="snackbar") {{ snackbarMessage }}
+    v-btn(icon, flat, dark, @click.native="snackbar = false")
+      v-icon(small) mdi-close
 
-    <v-navigation-drawer
-      temporary
-      right
-      v-model="rightDrawer"
-      fixed
-    >
-      <v-list>
-        <v-list-tile avatar>
-          <v-list-tile-avatar>
-            <v-icon>info</v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>Po just called you</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile avatar>
-          <v-list-tile-avatar>
-            <v-icon>info</v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>Da wants lollipop</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <me :w="toggleMe" :d="me"></me>
-    <v-snackbar
-      :timeout="3000"
-      top
-      v-model="snackbar"
-    >
-      {{ message }}
-      <v-btn flat color="accent" @click.native="snackbar = false">Close</v-btn>
-    </v-snackbar>
 
-	</v-app>
 </template>
-            
 <script>
-import { mapState, mapActions } from 'vuex'
-import store from '@/store'
-import to from 'await-to-js'
-import EditUser from '@/components/User/EditUser.vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import UserEdit from '@/components/users/edit.vue'
 
 export default {
+  name: 'index',
   data() {
     return {
       drawer: true,
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'fue',
+      mini: false,
+      dialog: false,
       snackbar: false,
-      toggleMe: false,
     }
   },
   components: {
-    me: EditUser,
+    UserEdit,
   },
   computed: {
     ...mapState({
-      uiSnackbar: state => state.ui.snackbar.toggle,
-      message: state => state.ui.snackbar.message,
-      items: state => {
+      me: state => state.auth.user,
+      // sidebar menu
+      menu: state => {
         let roles = state.auth.user.roles
-        return state.ui.menus.filter(m => {
+        return state.ui.navigationMenu.filter(m => {
           for (let auth of m.auth) {
             if (roles.indexOf(auth) != -1 || auth === '*') {
               return true
             }
           }
-
           return false
         })
       },
-      accessToken: state => state.auth.accessToken,
-      me: state => state.auth.user,
+      // snackbar
+      snackbarToggle: state => state.ui.snackbar.toggle,
+      snackbarMessage: state => state.ui.snackbar.message,
+      snackbarColor: state => state.ui.snackbar.color,
+    }),
+
+    ...mapGetters({
+      findBannersStore: 'banners/find',
     }),
   },
+
   watch: {
-    uiSnackbar(val) {
+    snackbarToggle() {
       this.snackbar = true
     },
   },
+
   methods: {
-    ...mapActions('auth', ['logout']),
+    ...mapActions({
+      logout: 'auth/logout',
+    }),
     signout() {
       this.logout()
       this.$router.push('/login')
     },
   },
-  async beforeRouteEnter(t, f, next) {
-    let res, err
-    if (!store.state.auth.accessToken) {
-      ;[err, res] = await to(store.dispatch('auth/authenticate'))
-      if (err) {
-        next('/login')
-      } else {
-        next()
-      }
-    }
-    next()
-  },
+  created() {},
 }
 </script>
+<style lang="stylus" scoped>
+.i-navigation-subheader
+  position relative
+  text-transform uppercase
+
+</style>

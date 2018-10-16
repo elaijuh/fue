@@ -17,7 +17,7 @@ SPA boilerplate with [FeathersJS](https://feathersjs.com/) as backend and [Vue.j
 
 Start mongo service
 
-`docker run -d -p 27017:27017 -v ~/docker/data/db:/data/db --rm mongo:3.6`
+`docker run -d -p 27017:27017 -v ~/docker/data/db:/data/db --rm mongo:4.0`
 
 Start frontend server
 

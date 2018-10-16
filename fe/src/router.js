@@ -5,7 +5,8 @@ import Index from './views/Index.vue'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Chat from './views/Chat.vue'
-import User from './views/User.vue'
+// import User from './views/User.vue'
+import Users from './components/users/list.vue'
 import store from './store'
 
 Vue.use(Router)
@@ -36,9 +37,9 @@ const router = new Router({
           component: Chat,
         },
         {
-          path: '/user',
+          path: '/users',
           name: 'user',
-          component: User,
+          component: Users,
         },
       ],
     },
@@ -50,12 +51,21 @@ const router = new Router({
   ],
 })
 
-router.beforeEach((to, from, next) => {
-  if (
-    to.matched.some(record => record.meta.requireLogin) &&
-    !window.localStorage.getItem('fue-jwt')
-  ) {
-    next('/login')
+router.beforeEach((t, f, next) => {
+  if (t.matched.some(record => record.meta.requireLogin)) {
+    if (!store.state.auth.accessToken) {
+      store
+        .dispatch('auth/authenticate')
+        .then(res => {
+          next()
+        })
+        .catch(err => {
+          console.log(err)
+          next('/login')
+        })
+    } else {
+      next()
+    }
   } else {
     next()
   }

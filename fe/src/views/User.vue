@@ -3,7 +3,7 @@
 
     <v-layout row wrap mb-3>
       <v-text-field
-        append-icon="search"
+        append-icon="mdi-search-web"
         label="Search"
         single-line
         hide-details
@@ -33,16 +33,16 @@
           <v-card-title><h4>{{ props.item.email }}</h4>
             <v-spacer></v-spacer>
             <v-btn icon small class="mx-0 my-0" @click.native.stop="toggleEditUser(props.item)">
-              <v-icon small>mode_edit</v-icon>
+              <v-icon small>mdi-pencil</v-icon>
             </v-btn>
             <v-menu bottom left offset-y>
               <v-btn icon small class="mx-0 my-0" slot="activator">
-                <v-icon small>more_vert</v-icon>
+                <v-icon small>mdi-dots-vertical</v-icon>
               </v-btn>
               <v-list>
                 <v-list-tile @click="">
                   <v-list-tile-action>
-                    <v-icon small>not_interested</v-icon>
+                    <v-icon small>mdi-block-helper</v-icon>
                   </v-list-tile-action>
                   <v-list-tile-content>
                     <v-list-tile-title class="body-1">Block</v-list-tile-title>
@@ -50,7 +50,7 @@
                 </v-list-tile>
                 <v-list-tile @click="deleteUser(props.item)">
                   <v-list-tile-action>
-                    <v-icon small>delete</v-icon>
+                    <v-icon small>mdi-delete</v-icon>
                   </v-list-tile-action>
                   <v-list-tile-content>
                     <v-list-tile-title class="body-1">Delete</v-list-tile-title>

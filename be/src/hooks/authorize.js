@@ -1,4 +1,6 @@
-const { AbilityBuilder, Ability, toMongoQuery } = require('casl')
+const { AbilityBuilder, Ability } = require('@casl/ability')
+const { toMongoQuery } = require('@casl/mongoose')
+
 const { Forbidden } = require('@feathersjs/errors')
 const TYPE_KEY = Symbol.for('type')
 
@@ -53,8 +55,7 @@ module.exports = function authorize(name = null) {
     }
 
     if (!ctx.id) {
-      const rules = ability.rulesFor(action, serviceName)
-      const query = toMongoQuery(rules)
+      const query = toMongoQuery(ability, serviceName, action)
 
       if (canReadQuery(query)) {
         Object.assign(ctx.params.query, query)

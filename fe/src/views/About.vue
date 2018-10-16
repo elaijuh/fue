@@ -1,6 +1,7 @@
-<template>
-  <div class="about">
-    <img src="../assets/do.png">
-    <h1>This is me</h1>
-  </div>
+<template lang="pug">
+v-container
+  v-layout(wrap, justify-center)
+    v-flex
+      img(src="../assets/do.png")
+      .title This is me
 </template>

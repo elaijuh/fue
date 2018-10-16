@@ -1,23 +1,37 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import feathersVuex from 'feathers-vuex'
-import feathers from '@/api/feathers'
-import ui from '@/store/modules/ui'
+import feathers from './feathers'
 
-const { service, auth } = feathersVuex(feathers, { idField: '_id' })
+import uiModule from '@/store/modules/ui'
+
+const { service, auth, FeathersVuex } = feathersVuex(feathers, {
+  idField: '_id',
+})
 
 Vue.use(Vuex)
+Vue.use(FeathersVuex)
 
 export default new Vuex.Store({
   modules: {
-    ui,
+    ui: uiModule,
   },
   state: {},
   mutations: {},
   actions: {},
   plugins: [
     auth({ userService: 'users' }),
-    service('users'),
+
+    service('users', {
+      replaceItems: true,
+      instanceDefaults: {
+        name: '',
+        email: '',
+        password: undefined,
+        roles: [],
+      },
+    }),
+
     service('messages'),
   ],
   strict: process.env.NODE_ENV !== 'production',

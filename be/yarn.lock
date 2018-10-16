@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@casl/ability@^2.0.1":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@casl/ability/-/ability-2.5.0.tgz#00c9ce1e8757e95f7c8a65a33db402c9617e4bff"
+  dependencies:
+    sift "^7.0.1"
+
+"@casl/mongoose@2.0.1":
+  version "2.0.1"
+  resolved "http://registry.npmjs.org/@casl/mongoose/-/mongoose-2.0.1.tgz#eb3f7162f55d1d1bde15ffac75b0b05ec0154687"
+
 "@feathers-plus/batch-loader@0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@feathers-plus/batch-loader/-/batch-loader-0.3.0.tgz#9e97d174fcf3d4aff8b4db1655757aabdf50b9ec"
@@ -1152,12 +1162,6 @@ capture-stack-trace@^1.0.0:
 caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
-
-casl@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/casl/-/casl-1.1.0.tgz#2b16ae8c3e010f8f3f326fb80fc637e26cae4dec"
-  dependencies:
-    sift "^5.0.0"
 
 chalk@^1.1.3:
   version "1.1.3"
@@ -4225,9 +4229,9 @@ shelljs@^0.8.0:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-sift@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/sift/-/sift-5.1.0.tgz#1bbf2dfb0eb71e56c4cc7fb567fbd1351b65015e"
+sift@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"

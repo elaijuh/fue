@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 // import VueFeathers from 'vue-feathers'
 import io from 'socket.io-client'
 import Feathers from '@feathersjs/feathers'
@@ -11,7 +11,7 @@ const socket = io(undefined, {
 })
 
 const feathers = Feathers()
-  .configure(socketio(socket))
+  .configure(socketio(socket, { timeout: 30000 }))
   .configure(
     authentication({
       storageKey: 'fue-jwt',

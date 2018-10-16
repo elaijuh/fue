@@ -14,18 +14,22 @@
     "await-to-js": "^2.0.1",
     "axios": "^0.18.0",
     "feathers-vuex": "^1.4.6",
+    "ramda": "^0.25.0",
     "socket.io-client": "^2.1.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.1.4",
+    "vuetify": "^1.2.8",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@mdi/font": "^2.8.94",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
     "@vue/eslint-config-prettier": "^3.0.0-rc.3",
     "lint-staged": "^6.0.0",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.5.16"

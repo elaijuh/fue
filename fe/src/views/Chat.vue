@@ -8,7 +8,7 @@
       <div class="typer">
         <input type="text" placeholder="Message" @keyup.enter="sendMessage" v-model="content">
         <v-btn icon class="blue--text emoji-panel" @click="toggleEmojiPanel">
-          <v-icon>mood</v-icon>
+          <v-icon>mdi-sticker-emoji</v-icon>
         </v-btn>
       </div>
     </v-flex>

@@ -1,9 +1,19 @@
 const state = {
-  menus: [
-    { icon: 'home', title: 'Home', to: '/home', auth: ['*'] },
-    { icon: 'pets', title: 'About', to: '/about', auth: ['*'] },
-    { icon: 'chat', title: 'Chat', to: '/chat', auth: ['*'] },
-    { icon: 'face', title: 'User', to: '/user', auth: ['ADMIN'] },
+  navigationMenu: [
+    { action: 'mdi-home', title: 'Home', to: '/home', auth: ['*'] },
+    { action: 'mdi-panda', title: 'About', to: '/about', auth: ['*'] },
+    {
+      action: 'mdi-message-text-outline',
+      title: 'Chat',
+      to: '/chat',
+      auth: ['*'],
+    },
+    {
+      action: 'mdi-account-multiple',
+      title: 'User',
+      to: '/users',
+      auth: ['ADMIN'],
+    },
   ],
   snackbar: {
     toggle: false,
@@ -23,6 +33,7 @@ const mutations = {
 }
 
 export default {
+  namespaced: true,
   state,
   mutations,
 }
