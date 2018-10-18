@@ -78,7 +78,7 @@ Vue.use(Vuetify, {
       lighten1: colors.grey.base,
     },
     secondary: colors.cyan.lighten4,
-    accent: colors.purple.lighten4,
+    accent: colors.purple.lighten3,
     error: colors.red.lighten2,
     warning: colors.amber.lighten2,
     info: colors.brown.lighten1,

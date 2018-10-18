@@ -20,7 +20,7 @@ v-app
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import to from 'await-to-js'
 
 export default {
@@ -43,13 +43,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['authenticate']),
+    ...mapMutations({ toggleSnackbar: 'ui/toggleSnackbar' }),
     async login(email, password) {
       let res, err
       ;[err, res] = await to(
         this.authenticate({ strategy: 'local', email, password })
       )
       if (err) {
-        this.$store.commit('toggleSnackbar', { message: err.message })
+        this.toggleSnackbar({ message: err.message })
       } else {
         this.$router.push('/')
       }

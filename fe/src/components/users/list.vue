@@ -3,15 +3,15 @@ v-container(fluid)
   v-layout
     v-flex(xs12)
       v-card
-        v-toolbar(flat)
+        v-toolbar(flat, dense)
           v-toolbar-title Users
           v-spacer
-          v-btn(color="primary", @click="create") create new user
+          v-btn(small, color="accent", @click="create") create new user
           UserEdit(v-if="dialog",
             :id="editUserId",
             :dialog="dialog",
             v-on:update:dialog="dialog = false")
-        v-card-title Users
+        v-card-title
           v-spacer
           v-text-field(v-model="search", append-icon="mdi-magnify", label="Search", single-line, hide-details)
         v-data-table(:headers="headers", :items="items", :search="search", :rows-per-page-items="[10, 25, 50]")

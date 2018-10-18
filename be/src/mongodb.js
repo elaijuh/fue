@@ -1,14 +1,17 @@
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
 
 module.exports = function(app) {
-  const config = app.get('mongodb')
-  const promise = MongoClient.connect(config.connection).then(client => {
+  const config = app.get('mongodb');
+  const promise = MongoClient.connect(
+    config.connection,
+    { useNewUrlParser: true }
+  ).then(client => {
     // For mongodb <= 2.2
     if (client.collection) {
-      return client
+      return client;
     }
 
-    return client.db(config.db)
-  })
-  app.set('mongoClient', promise)
-}
+    return client.db(config.db);
+  });
+  app.set('mongoClient', promise);
+};

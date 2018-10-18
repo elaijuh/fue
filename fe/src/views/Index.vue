@@ -23,9 +23,9 @@ v-app
           v-list-tile-content
               v-list-tile-title {{m.title}}
 
-  v-toolbar(dense, fixed, clipped-left, app, color="primary")
+  v-toolbar(dense, dark, fixed, clipped-left, app, color="primary")
     v-toolbar-side-icon(@click.stop="mini = !mini")
-    v-toolbar-title Creatix
+    v-toolbar-title FUE
     v-spacer
     span {{me.name || me.email}}
     v-menu(bottom, left)

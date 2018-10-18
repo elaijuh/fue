@@ -12,14 +12,14 @@ const state = {
       action: 'mdi-account-multiple',
       title: 'User',
       to: '/users',
-      auth: ['ADMIN'],
+      auth: ['admin'],
     },
   ],
   snackbar: {
     toggle: false,
     message: '',
   },
-  roles: ['ADMIN', 'GUEST'],
+  roles: ['admin', 'guest'],
 }
 
 // mutations

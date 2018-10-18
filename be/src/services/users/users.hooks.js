@@ -1,29 +1,25 @@
-const { iff, setNow } = require('feathers-hooks-common')
-const auth = require('@feathersjs/authentication')
-const local = require('@feathersjs/authentication-local')
+const { iff, isProvider } = require('feathers-hooks-common');
+const { authenticate } = require('@feathersjs/authentication').hooks;
+const authorize = require('../../hooks/authorize');
+
+const {
+  hashPassword,
+  protect,
+} = require('@feathersjs/authentication-local').hooks;
 
 module.exports = {
   before: {
-    all: [],
+    all: [iff(isProvider('external'), authenticate('jwt'), authorize())],
     find: [],
     get: [],
-    create: [
-      local.hooks.hashPassword({ passwordField: 'password' }),
-      setNow('createdAt', 'updatedAt'),
-    ],
-    update: [
-      local.hooks.hashPassword({ passwordField: 'password' }),
-      setNow('updatedAt'),
-    ],
-    patch: [
-      local.hooks.hashPassword({ passwordField: 'password' }),
-      setNow('updatedAt'),
-    ],
+    create: [hashPassword()],
+    update: [hashPassword()],
+    patch: [hashPassword()],
     remove: [],
   },
 
   after: {
-    all: [iff(ctx => ctx.params.provider, local.hooks.protect('password'))],
+    all: [iff(ctx => ctx.params.provider, protect('password'))],
     find: [],
     get: [],
     create: [],
@@ -41,4 +37,4 @@ module.exports = {
     patch: [],
     remove: [],
   },
-}
+};

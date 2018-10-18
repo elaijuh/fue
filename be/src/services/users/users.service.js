@@ -1,21 +1,21 @@
 // Initializes the `users` service on path `/users`
-const createService = require('feathers-mongodb')
-const hooks = require('./users.hooks')
+const createService = require('feathers-mongodb');
+const hooks = require('./users.hooks');
 
 module.exports = function(app) {
-  const paginate = app.get('paginate')
-  const mongoClient = app.get('mongoClient')
-  const options = { paginate }
+  const paginate = app.get('paginate');
+  const mongoClient = app.get('mongoClient');
+  const options = { paginate };
 
   // Initialize our service with any options it requires
-  app.use('/users', createService(options))
+  app.use('/users', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('users')
+  const service = app.service('users');
 
   mongoClient.then(db => {
-    service.Model = db.collection('users')
-  })
+    service.Model = db.collection('users');
+  });
 
   mongoClient.then(db => {
     db.createCollection('users', {
@@ -45,25 +45,25 @@ module.exports = function(app) {
       },
     })
       .then(c => {
-        c.createIndex({ email: 1 }, { unique: true })
-        service.Model = c
+        c.createIndex({ email: 1 }, { unique: true });
+        service.Model = c;
       })
       // create init admin user
       .then(() => {
-        return service.find({ query: { email: 'admin' } })
+        return service.find({ query: { email: 'admin' } });
       })
       .then(data => {
         if (!data.total) {
-          console.log('Init admin account')
+          console.log('Init admin account');
           service.create({
             email: 'admin',
             password: 'wrongpassword',
-            name: '',
-            roles: ['ADMIN'],
-          })
+            name: 'ADMIN',
+            roles: ['admin'],
+          });
         }
-      })
-  })
+      });
+  });
 
-  service.hooks(hooks)
-}
+  service.hooks(hooks);
+};
